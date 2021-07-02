@@ -31,3 +31,9 @@ x_val = x_train[-10000:]
 y_val = y_train[-10000:]
 x_train = x_train[:-10000]
 y_train = y_train[:-10000]
+
+# Prepare datasets for tensorflow.
+train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train))
+train_dataset = train_dataset.shuffle(buffer_size=1024).batch(batch_size)
+val_dataset = tf.data.Dataset.from_tensor_slices((x_val, y_val))
+val_dataset = val_dataset.batch(batch_size)
