@@ -37,3 +37,9 @@ train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train))
 train_dataset = train_dataset.shuffle(buffer_size=1024).batch(batch_size)
 val_dataset = tf.data.Dataset.from_tensor_slices((x_val, y_val))
 val_dataset = val_dataset.batch(batch_size)
+
+# Prepare metrics.
+train_acc_metric = keras.metrics.SparseCategoricalAccuracy()
+val_acc_metric = keras.metrics.SparseCategoricalAccuracy()
+
+# TODO training loop
