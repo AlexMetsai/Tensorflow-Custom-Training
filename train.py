@@ -62,7 +62,10 @@ for epoch in range(epochs):
         if step % 200 == 0:
             print("Training loss at step %d: %.4f" % (step, float(loss_value)))
         
-        # Display metrics at the end of each epoch.
-        train_acc = train_acc_metric.result()
-        print("Training accuracy over epoch: %.4f" % (float(train_acc),))
+    # Display metrics at the end of each epoch.
+    train_acc = train_acc_metric.result()
+    print("Training accuracy over epoch: %.4f" % (float(train_acc),))
+    
+    # Reset training metrics at the end of each epoch.
+    train_acc_metric.reset_states()
 
