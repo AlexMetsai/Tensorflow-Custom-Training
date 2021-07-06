@@ -42,6 +42,7 @@ val_dataset = val_dataset.batch(batch_size)
 train_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 val_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 
+# Training loop
 epochs = 3
 for epoch in range(epochs):
     print("\nStart of epoch %d" % (epoch,))
@@ -68,4 +69,14 @@ for epoch in range(epochs):
     
     # Reset training metrics at the end of each epoch.
     train_acc_metric.reset_states()
+    
+    # Run a validation loop at the end of each epoch.
+    for x_batch_val, y_batch_val in val_dataset:
+        val_logits = model(x_batch_val, training=False)
+        # Update val metrics.
+        val_acc_metric.update_state(y_batch_val, val_logits)
+    val_acc = val_acc_metric.result()
+    val_acc_metric.reset_states()
+    print("Validation acc: %.4f" % (float(val_acc),))
+    print("Time taken %.2fs" % (time.time() - start_time))
 
