@@ -42,4 +42,7 @@ val_dataset = val_dataset.batch(batch_size)
 train_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 val_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 
-# TODO training loop
+epochs = 3
+for epoch in range(epochs):
+    print("\nStart of epoch %d" % (epoch,))
+    start_time = time.time()
