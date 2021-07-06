@@ -46,3 +46,18 @@ epochs = 3
 for epoch in range(epochs):
     print("\nStart of epoch %d" % (epoch,))
     start_time = time.time()
+    
+    # Iterate over batches.
+    for step, (x_batch_train, y_batch_train) in enumerate(train_dataset):
+        with tf.GradientTape() as tape:
+            logits = model(x_batch_train, training=True)
+            loss_value = loss_fn(y_batch_train, logits)
+        grads = tape.gradient(loss_value, model.trainable_weights)
+        optimizer.apply_gradients(zip(grads, model.trainable_weights))
+        
+        # Update training metric.
+        train_acc_metric.update_state(y_batch_train, logits)
+        
+        # Output log info every 200 batches.
+        if step % 200 == 0:
+            print("Training loss at step %d: %.4f" % (step, float(loss_value)))
