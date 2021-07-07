@@ -1,4 +1,4 @@
-# tensorflow-custom-training
+# Tensorflow Custom Training
 
 Some early experimentation and exploitation of utilizing TensorFlow for a completely custom training loop.
 
