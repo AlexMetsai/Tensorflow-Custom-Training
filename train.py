@@ -43,7 +43,7 @@ train_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 val_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 
 # Training loop
-epochs = 3
+epochs = 50
 for epoch in range(epochs):
     print("\nStart of epoch %d" % (epoch,))
     start_time = time.time()
